@@ -145,7 +145,7 @@
     "QueueAlarmHigh": {
         "Type":"AWS::CloudWatch::Alarm",
         "Properties": {
-            "AlarmDescription": "Scale-upifMessage>2000for1hour",
+            "AlarmDescription": "ScaleUpIfMessageAboveTreshold",
             "MetricName": "ApproximateNumberOfMessagesVisible",
             "Namespace": "AWS/SQS",
             "Statistic": "Minimum",
@@ -159,14 +159,14 @@
                     "Value": __queue_name__
                 }
             ],
-            "ComparisonOperator": "GreaterThanThreshold"
+            "ComparisonOperator": "GreaterThanOrEqualToThreshold"
         }
     },
 
     "QueueAlarmLow": {
         "Type":"AWS::CloudWatch::Alarm",
         "Properties": {
-            "AlarmDescription": "Scale-downifMessage<500for1hour",
+            "AlarmDescription": "ScaleDownIfMessageBelowTreshold",
             "MetricName": "ApproximateNumberOfMessagesVisible",
             "Namespace": "AWS/SQS",
             "Statistic": "Maximum",
@@ -180,7 +180,7 @@
                     "Value": __queue_name__
                 }
             ],
-            "ComparisonOperator": "LessThanThreshold"
+            "ComparisonOperator": "LessThanOrEqualToThreshold"
         }
     },
 
